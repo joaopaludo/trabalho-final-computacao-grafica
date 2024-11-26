@@ -26,8 +26,8 @@ def contarFichas(contornos):
 
 
 
-# Leitura da imagem e ocnversões
-imagem = cv2.imread('images/prod1.jpg')
+# Leitura da imagem e conversões
+imagem = cv2.imread('images/prod2.png')
 
 imagem_cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
 
