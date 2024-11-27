@@ -4,7 +4,7 @@ import numpy as np
 LIMITES_CORES = {
     "vermelho": (np.array([0, 127, 140], np.uint8), np.array([180, 192, 178], np.uint8)),
     "verde": (np.array([25, 52, 72], np.uint8), np.array([102, 255, 255], np.uint8)),
-    "azul": (np.array([100, 40, 150], np.uint8), np.array([140, 180, 180], np.uint8)),
+    "azul": (np.array([100, 80, 100], np.uint8), np.array([140, 255, 180], np.uint8)),
     "preto": (np.array([0, 0, 0]), np.array([180, 255, 90])),
     "branco": (np.array([0, 0, 200]), np.array([180, 55, 255]))
 }
@@ -24,8 +24,6 @@ def identificar_cor(circulo, imagem_hsv):
 
     for cor, (inf, sup) in LIMITES_CORES.items():
         mascara_cor = cv2.inRange(imagem_hsv, inf, sup)
-        if cor == "azul":
-            cv2.imshow(f"Mascara azul", mascara_cor)
         intersecao = cv2.bitwise_and(mascara, mascara_cor)
         if cv2.countNonZero(intersecao) > 0.6 * np.pi * raio**2:
             return cor
