@@ -29,8 +29,7 @@ def identificar_cor(circulo, imagem_hsv):
             return cor
     return "desconhecida"
 
-def detectar_fichas(imagem_path):
-    imagem = cv2.imread(imagem_path)
+def detectar_fichas(imagem):
     imagem_cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
     imagem_suavizada = cv2.medianBlur(imagem_cinza, 5)
     circulos = cv2.HoughCircles(
@@ -61,11 +60,17 @@ def detectar_fichas(imagem_path):
     cv2.putText(imagem, f'Pontuacao: {total_pontuacao}', (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 2)
     cv2.imshow("Fichas Detectadas", imagem)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
     print(f"Detalhamento de fichas por cor: {fichas_por_cor}")
     print(f"Pontuação total: {total_pontuacao}")
 
-imagem_path = "images/test.png"
-detectar_fichas(imagem_path)
+video_path = "FICHAS.mp4"
+
+viceo = cv2.VideoCapture(video_path)
+
+while True:
+    _, imagem = viceo.read()
+    detectar_fichas(imagem)
+
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
