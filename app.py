@@ -36,10 +36,10 @@ def detectar_fichas(imagem):
         imagem_suavizada,
         cv2.HOUGH_GRADIENT,
         dp=1.2,
-        minDist=8,
-        param1=50,
+        minDist=15,
+        param1=85,
         param2=30,
-        minRadius=15,
+        minRadius=20,
         maxRadius=100
     )
     imagem_hsv = cv2.cvtColor(imagem, cv2.COLOR_BGR2HSV)
@@ -64,12 +64,12 @@ def detectar_fichas(imagem):
     print(f"Detalhamento de fichas por cor: {fichas_por_cor}")
     print(f"Pontuação total: {total_pontuacao}")
 
-video_path = "FICHAS.mp4"
+video_path = "video/chips.mp4"
 
-viceo = cv2.VideoCapture(video_path)
+video = cv2.VideoCapture(video_path)
 
 while True:
-    _, imagem = viceo.read()
+    _, imagem = video.read()
     detectar_fichas(imagem)
 
     if cv2.waitKey(5) & 0xFF == 27:
